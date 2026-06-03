@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neuro Boussole — Accompagnement Stratégique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #3730A3;
+    --purple-mid: #6C63FF;
+    --purple-light: #EEF2FF;
+    --purple-soft: #C7D2FE;
+    --ink: #1a1a2e;
+    --ink-mid: #3d3d5c;
+    --muted: #6b6b8a;
+    --border: #e5e7f0;
+    --bg: #fafaf9;
+    --white: #ffffff;
+    --warm: #f5f0e8;
+    --teal: #0d9488;
+    --teal-light: #ccfbf1;
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,250,249,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--purple);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    background: var(--purple);
+    color: white !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--purple-mid) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(13,148,136,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--purple-light);
+    color: var(--purple);
+    border: 1px solid var(--purple-soft);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--purple-mid);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--purple);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .hero-sub strong {
+    color: var(--ink-mid);
+    font-weight: 500;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--purple);
+    color: white;
+    padding: 0.875rem 2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--purple-mid);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary svg { width: 16px; height: 16px; }
+
+  .hero-proof {
+    margin-top: 3.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .proof-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .proof-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--teal);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 540px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  /* TRIANGLE CREDIBILITY */
+  .credibility {
+    background: var(--white);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .triangle-wrap {
+    position: relative;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .triangle-svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .pillar-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+
+  .pillar-card:hover {
+    border-color: var(--purple-soft);
+    transform: translateY(-2px);
+  }
+
+  .pillar-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+
+  .pillar-icon.orient { background: var(--purple-light); }
+  .pillar-icon.integr { background: var(--teal-light); }
+  .pillar-icon.career { background: var(--amber-light); }
+  .pillar-icon.terrain { background: #fce7f3; }
+
+  .pillar-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+
+  .pillar-card p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* HOW IT WORKS */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 600px;
+  }
+
+  .step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+
+  .step:last-child { padding-bottom: 0; }
+
+  .step-line {
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .step:last-child .step-line { display: none; }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--purple-light);
+    border: 2px solid var(--purple-soft);
+    color: var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content h3 {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+    color: var(--ink);
+    padding-top: 8px;
+  }
+
+  .step-content p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* WHO */
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .who-card {
+    background: var(--warm);
+    border-radius: 14px;
+    padding: 1.4rem 1.2rem;
+  }
+
+  .who-card .emoji { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+  .who-card h4 {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+    color: var(--ink);
+  }
+
+  .who-card p {
+    font-size: 0.825rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* QUOTE */
+  .quote-block {
+    background: var(--purple-light);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 12px 12px 0;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .quote-block blockquote {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+  }
+
+  .quote-attr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--ink);
+    border-radius: 20px;
+    padding: 4rem 3rem;
+    text-align: center;
+    color: white;
+    max-width: 960px;
+    margin: 0 auto 5rem;
+  }
+
+  .cta-section h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .cta-section h2 em {
+    font-style: italic;
+    color: #a5b4fc;
+  }
+
+  .cta-section p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: var(--purple);
+    padding: 0.875rem 2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-white:hover {
+    background: var(--purple-light);
+    transform: translateY(-1px);
+  }
+
+  .cta-note {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  footer a { color: var(--muted); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ABOUT */
+  .about-flex {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .about-avatar {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: var(--purple-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lora', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--purple);
+    border: 2px solid var(--purple-soft);
+  }
+
+  .about-text { flex: 1; min-width: 240px; }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    background: var(--warm);
+    color: var(--ink-mid);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 2.2rem; }
+    .cta-section { padding: 2.5rem 1.5rem; border-radius: 14px; }
+    .about-flex { flex-direction: column; }
+    section { padding: 3.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Neuro <span>Boussole</span></a>
+  <ul class="nav-links">
+    <li><a href="#piliers">Les piliers</a></li>
+    <li><a href="#comment">Comment ça marche</a></li>
+    <li><a href="#qui">Pour qui</a></li>
+    <li><a href="#rdv" class="nav-cta">Prendre RDV</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Accompagnement gratuit · Peer-to-peer · Confidentiel</div>
+  <h1>L'école de commerce pensée pour <em>ton cerveau</em></h1>
+  <p class="hero-sub">
+    Tu es neurodivergent·e et tu te prépares à une grande école, ou tu y es déjà —
+    <strong>Neuro Boussole</strong> t'accompagne sur l'orientation, l'intégration et la carrière.
+    Par quelqu'un qui a vécu la même chose.
+  </p>
+  <a class="btn-primary" href="#rdv">
+    Réserver un RDV gratuit
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M3 8h10M9 4l4 4-4 4"/>
+    </svg>
+  </a>
+  <div class="hero-proof">
+    <div class="proof-item"><div class="proof-dot"></div>TDAH, autisme, dyslexie, dys...</div>
+    <div class="proof-item"><div class="proof-dot"></div>100% gratuit</div>
+    <div class="proof-item"><div class="proof-dot"></div>RDV en 30 min</div>
+    <div class="proof-item"><div class="proof-dot"></div>Étudiant ESSEC</div>
+  </div>
+</div>
+
+<!-- CREDIBILITY -->
+<section id="about">
+  <div class="credibility">
+    <span class="section-label">Pourquoi me faire confiance</span>
+    <h2 class="section-title" style="margin-bottom:0.5rem;">Trois angles que personne d'autre ne cumule</h2>
+    <p style="color:var(--muted);font-size:0.95rem;margin-bottom:2.5rem;">J'ai travaillé en recrutement. Je suis en école de commerce. Je suis neurodivergent.<br>C'est cette combinaison qui rend l'accompagnement concret, pas théorique.</p>
+
+    <div class="triangle-wrap">
+      <svg class="triangle-svg" viewBox="0 0 520 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Triangle -->
+        <polygon points="260,30 480,350 40,350" fill="none" stroke="#C7D2FE" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <!-- Center connection lines -->
+        <line x1="260" y1="30" x2="260" y2="220" stroke="#E0E7FF" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="480" y1="350" x2="260" y2="220" stroke="#E0E7FF" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="40" y1="350" x2="260" y2="220" stroke="#E0E7FF" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <!-- Center badge -->
+        <circle cx="260" cy="220" r="48" fill="#EEF2FF" stroke="#C7D2FE" stroke-width="1.5"/>
+        <text x="260" y="213" text-anchor="middle" font-family="Lora,serif" font-size="11" fill="#4338CA" font-weight="600">Neuro</text>
+        <text x="260" y="229" text-anchor="middle" font-family="Lora,serif" font-size="11" fill="#4338CA" font-weight="600">Boussole</text>
+
+        <!-- Top node: Neurodivergent -->
+        <circle cx="260" cy="30" r="56" fill="#EEF2FF" stroke="#A5B4FC" stroke-width="1.5"/>
+        <text x="260" y="23" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#6366F1" font-weight="500">Neurodivergent</text>
+        <text x="260" y="37" text-anchor="middle" font-family="Lora,serif" font-size="13" fill="#3730A3" font-weight="600" font-style="italic">Vécu</text>
+
+        <!-- Bottom-right node: Recrutement -->
+        <circle cx="480" cy="350" r="60" fill="#CCFBF1" stroke="#99F6E4" stroke-width="1.5"/>
+        <text x="480" y="343" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#0F766E" font-weight="500">Recrutement</text>
+        <text x="480" y="360" text-anchor="middle" font-family="Lora,serif" font-size="13" fill="#0D9488" font-weight="600" font-style="italic">Adecco · CFM</text>
+
+        <!-- Bottom-left node: École -->
+        <circle cx="40" cy="350" r="60" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1.5"/>
+        <text x="40" y="343" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#B45309" font-weight="500">Grande école</text>
+        <text x="40" y="360" text-anchor="middle" font-family="Lora,serif" font-size="13" fill="#D97706" font-weight="600" font-style="italic">ESSEC BBA</text>
+      </svg>
+    </div>
+
+    <div class="about-flex" style="margin-top:2.5rem;text-align:left;">
+      <div class="about-avatar">NB</div>
+      <div class="about-text">
+        <p style="font-size:0.95rem;color:var(--ink-mid);line-height:1.75;margin-bottom:0.75rem;">
+          J'ai été des deux côtés de la table : chargé de recrutement chez Adecco et CFM, et étudiant à l'ESSEC Global BBA avec un passage à l'Université de Bath. J'ai traversé tout ça avec ma propre neurodivergence — et personne ne reliait ces trois angles.
+        </p>
+        <p style="font-size:0.95rem;color:var(--muted);line-height:1.75;">
+          C'est exactement pour ça que j'ai créé Neuro Boussole.
+        </p>
+        <div class="about-tags">
+          <span class="tag">ESSEC Global BBA</span>
+          <span class="tag">University of Bath</span>
+          <span class="tag">Adecco</span>
+          <span class="tag">CFM Talent Acquisition</span>
+          <span class="tag">Neurodivergent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PILIERS -->
+<section id="piliers">
+  <span class="section-label">Les 4 piliers</span>
+  <h2 class="section-title">Ce qu'on travaille ensemble</h2>
+  <p class="section-sub">Chaque RDV est personnalisé selon où tu en es. On peut aborder un pilier ou plusieurs.</p>
+
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-icon orient">🧭</div>
+      <h3>Orientation</h3>
+      <p>Comprendre les filières, décrypter le process d'admission, cibler les bonnes écoles selon ton profil et tes forces.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon integr">🌿</div>
+      <h3>Intégration</h3>
+      <p>Maîtriser les codes implicites, gérer la charge sociale, construire un réseau sans aller jusqu'à l'épuisement.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon career">🚀</div>
+      <h3>Carrière</h3>
+      <p>Décrocher des stages de haut niveau, bâtir ton identité professionnelle avec tes forces neurodivergentes.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-icon terrain">🗺️</div>
+      <h3>Préparer le terrain</h3>
+      <p>Savoir à quoi s'attendre avant d'arriver. Réduire l'incertitude, les démarches, les surprises du quotidien.</p>
+    </div>
+  </div>
+
+  <div class="quote-block" style="margin-top:2.5rem;">
+    <blockquote>"The point about eliminating ambiguity is exactly right. Giving students access to what to expect removes a huge amount of nervousness and stress."</blockquote>
+    <p class="quote-attr">— Retour d'un membre de la communauté neurodivergente en ligne</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="comment">
+  <span class="section-label">Comment ça marche</span>
+  <h2 class="section-title">Simple. Gratuit. Sans prise de tête.</h2>
+  <p class="section-sub">Un RDV suffit pour commencer. Pas d'engagement, pas de formulaire interminable.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Tu réserves un créneau</h3>
+        <p>Via Calendly, tu choisis un RDV de 30 à 45 min selon tes disponibilités. Visio ou téléphone, comme tu veux.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>On échange sans agenda caché</h3>
+        <p>Tu parles de ta situation, là où tu bloques. On explore ensemble les piliers utiles pour toi. Aucun pitch, aucun produit à vendre.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-line"></div>
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Tu repars avec des pistes concrètes</h3>
+        <p>Des ressources adaptées, des questions à explorer, des contacts si besoin. Pas de la théorie — du concret qui s'applique à ton cas.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>On continue si tu le veux</h3>
+        <p>Un suivi dans le temps, ou juste ce RDV unique. C'est toi qui décides du rythme.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO -->
+<section id="qui">
+  <span class="section-label">Pour qui</span>
+  <h2 class="section-title">Tu te reconnais ici ?</h2>
+  <p class="section-sub">Neuro Boussole est fait pour les profils neurodivergents qui évoluent dans l'environnement des grandes écoles.</p>
+
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="emoji">🎯</div>
+      <h4>En prépa ou en terminale</h4>
+      <p>Tu veux intégrer une école de commerce et tu te demandes si c'est vraiment fait pour toi.</p>
+    </div>
+    <div class="who-card">
+      <div class="emoji">🏫</div>
+      <h4>Déjà en école</h4>
+      <p>Tu es dedans mais tu galères avec les codes non-dits, les groupes, ou les démarches admin.</p>
+    </div>
+    <div class="who-card">
+      <div class="emoji">💼</div>
+      <h4>En recherche de stage</h4>
+      <p>Tu passes des entretiens mais quelque chose cloche. Tu veux comprendre ce que les recruteurs cherchent vraiment.</p>
+    </div>
+    <div class="who-card">
+      <div class="emoji">🧩</div>
+      <h4>Diagnostiqué·e ou en cours</h4>
+      <p>TDAH, autisme, dyslexie, HPI… peu importe le label. Ce qui compte c'est comment tu fonctionnes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="padding: 0 2rem;">
+  <div class="cta-section" id="rdv">
+    <h2>Prêt·e à trouver <em>ta</em> boussole ?</h2>
+    <p>Un RDV gratuit de 30 min. Aucun engagement. Juste une conversation entre pairs.</p>
+    <a class="btn-white" href="https://calendly.com" target="_blank">
+      Réserver mon RDV
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </a>
+    <span class="cta-note">100% gratuit · Confidentiel · Pensé pour les profils neuro</span>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Neuro Boussole · Fait avec intention, pour les cerveaux qui pensent différemment.</p>
+  <p style="margin-top:0.5rem;"><a href="mailto:contact@neuroboussole.fr">contact@neuroboussole.fr</a></p>
+</footer>
+
+</body>
+</html>
